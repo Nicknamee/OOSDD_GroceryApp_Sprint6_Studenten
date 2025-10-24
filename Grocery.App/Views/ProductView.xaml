@@ -4,8 +4,11 @@
              xmlns:vm="clr-namespace:Grocery.App.ViewModels"
              x:Class="Grocery.App.Views.ProductView"
              Title="ProductView">
-    
-    <Shell.TitleView>
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="Nieuw product" Command="{Binding CreateNewProductCommand}" IsVisible="{Binding CanCreateProduct}" />
+	</ContentPage.ToolbarItems>
+
+	<Shell.TitleView>
         <Grid>
             <Label Text="Producten" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" />
         </Grid>

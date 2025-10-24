@@ -5,7 +5,7 @@ using Grocery.Core.Models;
 using System;
 using System.Globalization;
 using System.Threading.Tasks;
-using static Java.Util.Jar.Attributes;
+
 
 namespace Grocery.App.ViewModels
 {
