@@ -1,4 +1,4 @@
-﻿sing Grocery.App.ViewModels;
+﻿using Grocery.App.ViewModels;
 
 namespace Grocery.App.Views;
 
