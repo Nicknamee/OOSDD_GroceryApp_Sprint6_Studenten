@@ -2,7 +2,6 @@
 using Grocery.Core.Models;
 using Microsoft.Data.Sqlite;
 using Grocery.Core.Data.Helpers;
-using Grocery.Core.Interfaces.Repositories;
 
 namespace Grocery.Core.Data.Repositories
 {
@@ -12,18 +11,20 @@ namespace Grocery.Core.Data.Repositories
 
         public GroceryListItemsRepository()
         {
+			//maakt de table aan 
 			CreateTable(@"CREATE TABLE IF NOT EXISTS GroceryListItem (
                             [Id] INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                             [GroceryListId] INTEGER NOT NULL,
                             [ProductId] INTEGER NOT NULL,
                             [Amount] INTEGER NOT NULL)");
+
 			List<string> insertQueries = [@"INSERT OR IGNORE INTO GroceryListItem(Id, GroceryListId, ProductId, Amount) VALUES(1, 1, 1, 3)",
 										  @"INSERT OR IGNORE INTO GroceryListItem(Id, GroceryListId, ProductId, Amount) VALUES(2, 1, 2, 1)",
 										  @"INSERT OR IGNORE INTO GroceryListItem(Id, GroceryListId, ProductId, Amount) VALUES(3, 1, 3, 4)",
 										  @"INSERT OR IGNORE INTO GroceryListItem(Id, GroceryListId, ProductId, Amount) VALUES(4, 2, 1, 2)",
 										  @"INSERT OR IGNORE INTO GroceryListItem(Id, GroceryListId, ProductId, Amount) VALUES(5, 2, 2, 5)"];
 			InsertMultipleWithTransaction(insertQueries);
-			GetAll();
+			GetAll(); //Haalt alles opnieuw op
 		}
 
 		public List<GroceryListItem> GetAll()
@@ -54,7 +55,7 @@ namespace Grocery.Core.Data.Repositories
 			return groceryListItems.Where(g => g.GroceryListId == id).ToList();
         }
 
-        public GroceryListItem Add(GroceryListItem item)
+        public GroceryListItem Add(GroceryListItem item) //Toevoegen
         {
 			string insertQuery = $"INSERT INTO GroceryListItem(GroceryListId, ProductId, Amount) VALUES(@GroceryListId, @ProductId, @Amount) Returning RowId;";
 			OpenConnection();
@@ -70,7 +71,7 @@ namespace Grocery.Core.Data.Repositories
 			return item;
 		}
 
-        public GroceryListItem? Delete(GroceryListItem item)
+        public GroceryListItem? Delete(GroceryListItem item) //Verwijderen
         {
 			string deleteQuery = $"DELETE FROM GroceryListItem WHERE Id = {item.Id};";
 			OpenConnection();
@@ -101,7 +102,7 @@ namespace Grocery.Core.Data.Repositories
 			return gli;
 		}
 
-        public GroceryListItem? Update(GroceryListItem item)
+        public GroceryListItem? Update(GroceryListItem item) //Updaten items
         {
 			string updateQuery = $"UPDATE GroceryListItem SET GroceryListId = @GroceryListId, ProductId = @ProductId, Amount = @Amount  WHERE Id = {item.Id};";
 			OpenConnection();
