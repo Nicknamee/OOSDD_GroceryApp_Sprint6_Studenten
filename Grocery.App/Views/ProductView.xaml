@@ -5,7 +5,7 @@
              x:Class="Grocery.App.Views.ProductView"
              Title="ProductView">
 	<ContentPage.ToolbarItems>
-		<ToolbarItem Text="Nieuw product" Command="{Binding CreateNewProductCommand}" IsVisible="{Binding CanCreateProduct}" />
+		<ToolbarItem Text="Nieuw product" Command="{Binding CreateNewProductCommand}" IsEnabled="{Binding CanCreateProduct}" />
 	</ContentPage.ToolbarItems>
 
 	<Shell.TitleView>
@@ -15,7 +15,7 @@
     </Shell.TitleView>
 
     <Border Stroke="#C49B33" StrokeThickness="4" Padding="10" Margin="10" HorizontalOptions="Center">
-        <CollectionView ItemsSource="{Binding Products}" Margin="20" HorizontalOptions="Center">
+        <CollectionView ItemsSource="{Binding Items}" Margin="20" HorizontalOptions="Center">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
             </CollectionView.ItemsLayout>
